@@ -39,10 +39,8 @@ class Settings(BaseSettings):
     # CORS
     ALLOWED_ORIGINS: List[str] = [
         "http://localhost:3000",
-        "https://summrai.app",
-        "https://www.summrai.app",
+        "https://summr-ai-delta.vercel.app",
     ]
-
     class Config:
         env_file = ".env"
         case_sensitive = True
