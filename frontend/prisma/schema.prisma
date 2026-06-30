@@ -1,0 +1,70 @@
+// Prisma schema for SummrAI
+// Database: PostgreSQL (Supabase)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String    @id @default(cuid())
+  clerkId             String    @unique @map("clerk_id")
+  email               String?   @unique
+  name                String?
+  plan                Plan      @default(FREE)
+  summariesThisMonth  Int       @default(0) @map("summaries_this_month")
+  totalSummaries      Int       @default(0) @map("total_summaries")
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updatedAt           DateTime  @updatedAt @map("updated_at")
+  summaries           Summary[]
+
+  @@map("users")
+}
+
+model Summary {
+  id              String      @id @default(cuid())
+  userId          String      @map("user_id")
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title           String?
+  originalText    String      @map("original_text") @db.Text
+  summaryShort    String?     @map("summary_short") @db.Text
+  summaryMedium   String?     @map("summary_medium") @db.Text
+  summaryDetailed String?     @map("summary_detailed") @db.Text
+  bullets         Json?
+  takeaways       Json?
+  actions         Json?
+  names           Json?
+  dates           Json?
+  sentiment       String?
+  sentimentScore  Float?      @map("sentiment_score")
+  sentimentNote   String?     @map("sentiment_note") @db.Text
+  readingTime     Int?        @map("reading_time")
+  wordCount       Int?        @map("word_count")
+  compression     String?
+  difficulty      String?
+  contentType     ContentType @default(TEXT) @map("content_type")
+  modelUsed       String?     @map("model_used")
+  isFavorite      Boolean     @default(false) @map("is_favorite")
+  createdAt       DateTime    @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("summaries")
+}
+
+enum Plan {
+  FREE
+  PRO
+  TEAM
+}
+
+enum ContentType {
+  TEXT
+  EMAIL
+  ARTICLE
+  PDF
+}

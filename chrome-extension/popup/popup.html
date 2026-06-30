@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SummrAI</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo">S</div>
+    <span class="logo-text">SummrAI</span>
+    <div class="header-right">
+      <div class="dot-badge"></div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="summarize">Summarize</button>
+    <button class="tab" data-tab="history">History</button>
+    <button class="tab" data-tab="settings">Settings</button>
+  </div>
+
+  <!-- Summarize Tab -->
+  <div class="tab-content active" id="tab-summarize">
+    <textarea id="input-text" placeholder="Paste text to summarize, or use the buttons below…"></textarea>
+
+    <div class="quick-btns">
+      <button class="quick-btn" id="btn-page">
+        <span>📄</span> Summarize page
+      </button>
+      <button class="quick-btn" id="btn-selection">
+        <span>✂️</span> Selection
+      </button>
+    </div>
+
+    <div class="options-row">
+      <select id="length-sel">
+        <option value="short">Short</option>
+        <option value="medium" selected>Medium</option>
+        <option value="detailed">Detailed</option>
+      </select>
+      <label class="toggle-label">
+        <input type="checkbox" id="tog-bullets" checked> Bullets
+      </label>
+    </div>
+
+    <button class="summarize-btn" id="btn-summarize">✨ Generate Summary</button>
+
+    <div id="output-area" class="output hidden"></div>
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <span>Summarizing…</span>
+    </div>
+  </div>
+
+  <!-- History Tab -->
+  <div class="tab-content hidden" id="tab-history">
+    <div id="history-list"></div>
+  </div>
+
+  <!-- Settings Tab -->
+  <div class="tab-content hidden" id="tab-settings">
+    <div class="settings-item">
+      <label>API URL</label>
+      <input type="text" id="api-url" placeholder="https://api.summrai.app">
+    </div>
+    <div class="settings-item">
+      <label>Default length</label>
+      <select id="default-length">
+        <option value="short">Short</option>
+        <option value="medium" selected>Medium</option>
+        <option value="detailed">Detailed</option>
+      </select>
+    </div>
+    <button class="save-btn" id="btn-save-settings">Save settings</button>
+  </div>
+
+  <div class="footer">
+    <a href="https://summrai.app" target="_blank">Open dashboard →</a>
+  </div>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>
