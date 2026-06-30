@@ -1,241 +1,66 @@
-# SummrAI — AI-Powered Email & Article Summarizer
+# SummrAI
 
-> **Summarize Anything. Understand Everything.**
-> From emails to research papers, SummrAI delivers accurate, intelligent summaries in seconds — saving you hours every week.
+**Turn walls of text into clear insights.**
 
-![SummrAI Dashboard](docs/screenshot-dashboard.png)
+SummrAI is an AI-powered summarization platform that condenses emails, articles, research papers, and PDFs into structured, actionable summaries in seconds. Built with enterprise-grade AI models and a clean, modern interface.
+
+🔗 **Live app:** [summr-ai-delta.vercel.app](https://summr-ai-delta.vercel.app)
 
 ---
 
 ## ✨ Features
 
-| Feature | Description |
-|---|---|
-| **Multi-format summarization** | Emails, articles, PDFs, research papers, blog posts |
-| **3 summary lengths** | Short (2-3 sentences), Medium (1-2 paragraphs), Detailed (3-4 paragraphs) |
-| **Structured extraction** | Bullet points, key takeaways, action items, names & dates |
-| **Sentiment analysis** | Tone detection with score and explanation |
-| **Smart email assistant** | Detect structure + generate professional/casual/follow-up replies |
-| **Content repurposing** | Tweet threads, LinkedIn posts, TLDR, executive summaries, blog outlines, meeting notes |
-| **Export** | PDF, DOCX, Markdown, plain text |
-| **History & search** | Full searchable history with favorites, sort, delete |
-| **Analytics** | Usage charts, word counts, time saved metrics |
-| **Chrome extension** | Gmail integration + floating article summarizer |
-| **Multiple AI models** | BART Large CNN, DistilBART, T5 (switchable) |
+- **Multi-format summarization** — Paste emails, articles, blogs, research papers, or any text and get short, medium, or detailed summaries instantly.
+- **Structured extraction** — Auto-extract bullet points, key takeaways, action items, names, dates, and questions answered.
+- **Sentiment & readability analysis** — Get sentiment scores, reading time estimates, compression ratio, and difficulty level at a glance.
+- **Content repurposing** — Transform any text into a tweet thread, LinkedIn post, executive summary, or meeting notes in one click.
+- **Smart email assistant** — Detects greeting, body, and signature, and auto-generates professional, casual, or follow-up replies.
+- **Export anywhere** — Download summaries as PDF, DOCX, Markdown, or plain text. Full history with search, filter, and favorites.
+- **Analytics dashboard** — Track usage, time saved, and summary trends over time.
+- **Secure authentication** — User accounts and session management handled via Clerk.
 
 ---
 
-## 🏗 Tech Stack
+## 📸 Screenshots
+
+> _Add screenshots or a demo GIF here_
+
+| Landing Page | Dashboard | Summary Output |
+|---|---|---|
+| `screenshot-landing.png` | `screenshot-dashboard.png` | `screenshot-output.png` |
+
+---
+
+## 🛠️ Tech Stack
 
 ### Frontend
-- **Next.js 15** (App Router, Server Components)
-- **TypeScript** — full type safety
-- **Tailwind CSS** — utility-first styling
-- **Framer Motion** — page transitions & animations
-- **Shadcn/UI** — accessible component library
-- **Zustand** — lightweight state management
-- **Recharts** — analytics charts
-- **React Hook Form + Zod** — form validation
+- **[Next.js 16](https://nextjs.org/)** (App Router) — React framework with server components
+- **[TypeScript](https://www.typescriptlang.org/)** — type-safe development
+- **[Tailwind CSS](https://tailwindcss.com/)** — utility-first styling
+- **[Framer Motion](https://www.framer.com/motion/)** — animations and transitions
+- **[Clerk](https://clerk.com/)** — authentication and user management
+- **[Radix UI](https://www.radix-ui.com/)** — accessible, unstyled UI primitives
+- **[Recharts](https://recharts.org/)** — analytics data visualization
+- **[Zustand](https://github.com/pmndrs/zustand)** — lightweight state management
+- **[React Hook Form](https://react-hook-form.com/)** + **[Zod](https://zod.dev/)** — form handling and validation
+- **[Axios](https://axios-http.com/)** — HTTP client for API requests
 
 ### Backend
-- **FastAPI** — high-performance async Python API
-- **HuggingFace Transformers** — BART, DistilBART, T5
-- **SQLAlchemy (async)** — ORM with PostgreSQL
-- **Pydantic v2** — request/response validation
+- **[FastAPI](https://fastapi.tiangolo.com/)** — high-performance Python web framework
+- **[SQLAlchemy](https://www.sqlalchemy.org/)** (async) + **[asyncpg](https://github.com/MagicStack/asyncpg)** — database ORM and PostgreSQL driver
+- **[Alembic](https://alembic.sqlalchemy.org/)** — database migrations
+- **[Hugging Face Transformers](https://huggingface.co/docs/transformers)** — AI summarization models (BART, DistilBART, T5)
+- **[PyTorch](https://pytorch.org/)** — deep learning backend for model inference
+- **[Supabase](https://supabase.com/)** — PostgreSQL database hosting and file storage
+- **[python-jose](https://github.com/mpdavis/python-jose)** — JWT verification for Clerk-authenticated requests
+- **[PyMuPDF](https://pymupdf.readthedocs.io/)** — PDF text extraction
+- **[ReportLab](https://www.reportlab.com/)** + **[python-docx](https://python-docx.readthedocs.io/)** — PDF and DOCX export generation
+- **[SlowAPI](https://github.com/laurentS/slowapi)** — rate limiting
 
 ### Infrastructure
-- **Clerk** — authentication & user management
-- **Supabase** — PostgreSQL database + file storage
-- **Vercel** — frontend deployment
-- **Render** — backend deployment
-- **Docker Compose** — local development
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js 20+
-- Python 3.11+
-- PostgreSQL 15+ (or use Supabase)
-- [Clerk account](https://clerk.com) (free)
-
-### 1. Clone the repo
-
-```bash
-git clone https://github.com/yourusername/summrai.git
-cd summrai
-```
-
-### 2. Frontend setup
-
-```bash
-cd frontend
-cp .env.local.example .env.local
-# Fill in your keys (see Environment Variables section)
-npm install
-npx prisma generate
-npx prisma db push
-npm run dev
-```
-
-Frontend runs at → `http://localhost:3000`
-
-### 3. Backend setup
-
-```bash
-cd backend
-cp .env.example .env
-# Fill in your keys
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
-```
-
-Backend runs at → `http://localhost:8000`
-API docs at → `http://localhost:8000/docs`
-
-### 4. Docker (alternative)
-
-```bash
-# Copy both env files first
-cp frontend/.env.local.example frontend/.env.local
-cp backend/.env.example backend/.env
-# Edit both files with your keys
-
-docker compose up --build
-```
-
----
-
-## 🔑 Environment Variables
-
-### Frontend (`frontend/.env.local`)
-
-```env
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-CLERK_SECRET_KEY=sk_test_...
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
-
-NEXT_PUBLIC_API_URL=http://localhost:8000
-
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-
-DATABASE_URL=postgresql://postgres:password@localhost:5432/summrai
-DIRECT_URL=postgresql://postgres:password@localhost:5432/summrai
-```
-
-### Backend (`backend/.env`)
-
-```env
-DATABASE_URL=postgresql+asyncpg://postgres:password@localhost:5432/summrai
-
-CLERK_SECRET_KEY=sk_test_...
-CLERK_JWKS_URL=https://your-app.clerk.accounts.dev/.well-known/jwks.json
-
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_SERVICE_KEY=your-service-role-key
-
-HF_MODEL_BART=facebook/bart-large-cnn
-HF_MODEL_DISTILBART=sshleifer/distilbart-cnn-12-6
-HF_MODEL_T5=t5-base
-HF_CACHE_DIR=./models_cache
-```
-
----
-
-## 📡 API Reference
-
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/health` | Health check |
-| `POST` | `/summarize` | Summarize text |
-| `POST` | `/summarize/repurpose` | Repurpose content |
-| `POST` | `/reply` | Analyze email + generate reply |
-| `GET` | `/history` | Get summary history |
-| `DELETE` | `/history/{id}` | Delete summary |
-| `PATCH` | `/history/{id}/favorite` | Toggle favorite |
-| `GET` | `/export/{id}?format=pdf` | Export summary |
-| `POST` | `/upload` | Upload PDF/TXT file |
-| `GET` | `/models` | List available AI models |
-| `GET` | `/analytics` | Usage analytics |
-
-### Summarize request body
-
-```json
-{
-  "text": "Your text here...",
-  "length": "short | medium | detailed",
-  "options": ["bullets", "takeaways", "actions", "names", "sentiment"],
-  "model": "bart | distilbart | t5",
-  "content_type": "text | email | article | pdf"
-}
-```
-
----
-
-## 🌐 Deployment
-
-### Frontend → Vercel
-
-```bash
-cd frontend
-npx vercel --prod
-```
-
-Set all environment variables in the Vercel dashboard under **Settings → Environment Variables**.
-
-### Backend → Render
-
-1. Push backend to GitHub
-2. Create a new **Web Service** on [render.com](https://render.com)
-3. Set build command: `pip install -r requirements.txt`
-4. Set start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-5. Add all environment variables from `.env.example`
-
-### Database → Supabase
-
-1. Create a new project at [supabase.com](https://supabase.com)
-2. Copy the **Connection String** (Transaction mode)
-3. Set as `DATABASE_URL` in both frontend and backend
-4. Run `npx prisma db push` to create tables
-
----
-
-## 🧩 Chrome Extension
-
-1. Open Chrome → `chrome://extensions/`
-2. Enable **Developer mode**
-3. Click **Load unpacked**
-4. Select the `chrome-extension/` folder
-
-**Features:**
-- Right-click any selected text → "Summarize with SummrAI"
-- Gmail integration: "Summarize" button appears on emails
-- Floating ✨ button on any article page
-- History stored in Chrome storage
-
----
-
-## 🧪 Tests
-
-```bash
-# Backend tests
-cd backend
-pytest tests/ -v
-
-# Frontend type checking
-cd frontend
-npm run type-check
-
-# Frontend linting
-npm run lint
-```
+- **[Vercel](https://vercel.com/)** — frontend hosting and deployment
+- **[Render](https://render.com/)** — backend hosting (Dockerized FastAPI service)
+- **[Supabase](https://supabase.com/)** — managed PostgreSQL database and file storage bucket
 
 ---
 
@@ -243,62 +68,177 @@ npm run lint
 
 ```
 summrai/
-├── frontend/                    # Next.js 15 app
+├── frontend/                  # Next.js application
+│   ├── app/                   # App Router pages and layouts
+│   │   ├── dashboard/         # Authenticated dashboard routes
+│   │   ├── sign-in/           # Clerk sign-in page
+│   │   ├── sign-up/           # Clerk sign-up page
+│   │   └── page.tsx           # Landing page
+│   ├── components/            # Reusable UI components
+│   ├── services/              # API client functions (axios)
+│   ├── store/                 # Zustand state stores
+│   ├── hooks/                 # Custom React hooks
+│   ├── middleware.ts          # Clerk auth middleware
+│   └── package.json
+│
+├── backend/                   # FastAPI application
 │   ├── app/
-│   │   ├── page.tsx             # Landing page
-│   │   ├── layout.tsx           # Root layout (Clerk)
-│   │   ├── dashboard/           # Protected dashboard
-│   │   │   ├── page.tsx         # Summarize
-│   │   │   ├── history/         # History
-│   │   │   ├── analytics/       # Analytics
-│   │   │   ├── email/           # Email assistant
-│   │   │   └── repurpose/       # Content repurpose
-│   │   └── sign-in / sign-up/
-│   ├── components/
-│   │   ├── dashboard/           # StatCard, etc.
-│   │   └── summarize/           # InputPanel, OutputPanel
-│   ├── store/                   # Zustand stores
-│   ├── services/                # API service layer
-│   ├── hooks/                   # Custom React hooks
-│   └── prisma/schema.prisma     # Database schema
+│   │   ├── api/routes/        # API endpoint routers
+│   │   ├── core/              # Config and database setup
+│   │   ├── middleware/        # Auth and rate-limiting middleware
+│   │   ├── models/            # SQLAlchemy models
+│   │   ├── schemas/           # Pydantic schemas
+│   │   ├── services/          # AI, email, and repurposing logic
+│   │   └── utils/             # Text and export utilities
+│   ├── tests/                 # API and service tests
+│   ├── main.py                # FastAPI app entry point
+│   ├── requirements.txt
+│   └── Dockerfile
 │
-├── backend/                     # FastAPI
-│   ├── main.py                  # App entry point
-│   └── app/
-│       ├── api/routes/          # All API routes
-│       ├── core/                # Config, database
-│       ├── models/              # SQLAlchemy models
-│       ├── schemas/             # Pydantic schemas
-│       ├── services/            # AI, email, repurpose
-│       ├── middleware/          # Auth, rate limiting
-│       └── utils/               # Text, export utils
-│
-├── chrome-extension/            # Browser extension
-│   ├── manifest.json
-│   ├── background.js
-│   ├── popup/                   # Extension popup UI
-│   └── content/                 # Gmail + article scripts
-│
-├── docker-compose.yml
 └── README.md
 ```
 
 ---
 
+## 🚀 Getting Started (Local Development)
+
+### Prerequisites
+
+- **Node.js** 18+ and npm
+- **Python** 3.11
+- **PostgreSQL** database (or a [Supabase](https://supabase.com/) project)
+- A **[Clerk](https://clerk.com/)** account for authentication keys
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Priyanshi0907/Summr-AI.git
+cd Summr-AI
+```
+
+### 2. Backend setup
+
+```bash
+cd backend
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+# macOS/Linux
+source venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+Create a `.env` file in `backend/` (use `.env.example` as a reference):
+
+```env
+DATABASE_URL=postgresql+asyncpg://<user>:<password>@<host>:5432/<database>
+CLERK_SECRET_KEY=sk_test_xxxx
+CLERK_PUBLISHABLE_KEY=pk_test_xxxx
+CLERK_JWKS_URL=https://your-clerk-instance.clerk.accounts.dev/.well-known/jwks.json
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=your-supabase-service-key
+SUPABASE_BUCKET=summrai-uploads
+HF_MODEL_BART=facebook/bart-large-cnn
+HF_MODEL_DISTILBART=sshleifer/distilbart-cnn-12-6
+HF_MODEL_T5=t5-base
+HF_CACHE_DIR=./models_cache
+DEBUG=false
+RATE_LIMIT_PER_MINUTE=20
+MAX_TEXT_LENGTH=50000
+```
+
+Run the backend server:
+
+```bash
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+The API will be available at `http://localhost:8000`, with interactive docs at `http://localhost:8000/docs`.
+
+### 3. Frontend setup
+
+```bash
+cd frontend
+npm install
+```
+
+Create a `.env.local` file in `frontend/`:
+
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_xxxx
+CLERK_SECRET_KEY=sk_test_xxxx
+NEXT_PUBLIC_API_URL=http://localhost:8000
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+Run the frontend dev server:
+
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:3000`.
+
+### 4. Run tests
+
+Backend:
+```bash
+cd backend
+pytest
+```
+
+Frontend:
+```bash
+cd frontend
+npm run test
+```
+
+---
+
+## 🌐 Deployment
+
+This project is deployed as two independently hosted services:
+
+- **Frontend** → [Vercel](https://vercel.com/), auto-deploys from the `main` branch
+- **Backend** → [Render](https://render.com/), Dockerized FastAPI service, auto-deploys from the `main` branch
+
+The frontend communicates with the backend over HTTPS using the `NEXT_PUBLIC_API_URL` environment variable. Both services must have matching CORS configuration (`ALLOWED_ORIGINS` in `backend/app/core/config.py`) and valid Clerk keys for authentication to work correctly across environments.
+
+> **Note:** The backend runs on Render's free tier, which spins down after periods of inactivity. The first request after idle time may take 30–50 seconds while the instance wakes up.
+
+---
+
+## 🔐 Authentication
+
+User authentication is handled entirely by [Clerk](https://clerk.com/), supporting sign-up, sign-in, and session management out of the box. Protected routes (e.g. `/dashboard/*`) are guarded via Clerk middleware on the frontend, and API requests are authenticated on the backend by verifying Clerk-issued JWTs against the Clerk JWKS endpoint.
+
+---
+
 ## 🤝 Contributing
 
+Contributions are welcome. To contribute:
+
 1. Fork the repository
-2. Create your feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m "Add your feature"`)
+4. Push to your branch (`git push origin feature/your-feature`)
 5. Open a Pull Request
 
 ---
 
 ## 📄 License
 
-MIT License — see [LICENSE](LICENSE) for details.
+This project is licensed under the terms specified in the [LICENSE](./LICENSE) file.
 
 ---
 
-Built with ❤️ using Claude AI, Next.js, and FastAPI.
+## 👤 Author
+
+**Priyanshi Choudhary**
+GitHub: [@Priyanshi0907](https://github.com/Priyanshi0907)
+
+---
+
+Built with ❤️ using Claude AI.
