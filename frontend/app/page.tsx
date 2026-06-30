@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowRight, Zap, FileText, BarChart2, Mail, RefreshCw, Download, Star, Check } from 'lucide-react'
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { Show, UserButton } from '@clerk/nextjs'
 
 const FEATURES = [
   { icon: Zap, title: 'Multi-format summarization', desc: 'Paste emails, articles, blogs, research papers or any text. Get short, medium, or detailed summaries instantly.', color: '#7c6af7' },
@@ -67,7 +67,7 @@ export default function LandingPage() {
           ))}
         </motion.div>
         <motion.div initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} className="flex gap-3 items-center">
-          <SignedIn>
+          <Show when="signed-in">
             <Link href="/dashboard">
               <button className="text-sm px-4 py-2 rounded-lg transition-all mr-1"
                 style={{ background: 'transparent', border: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}
@@ -77,8 +77,8 @@ export default function LandingPage() {
               </button>
             </Link>
             <UserButton afterSignOutUrl="/" />
-          </SignedIn>
-          <SignedOut>
+          </Show>
+          <Show when="signed-out">
             <Link href="/sign-in">
               <button className="text-sm px-4 py-2 rounded-lg transition-all"
                 style={{ background: 'transparent', border: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}
@@ -92,7 +92,7 @@ export default function LandingPage() {
                 Get started
               </button>
             </Link>
-          </SignedOut>
+          </Show>
         </motion.div>
       </nav>
 
