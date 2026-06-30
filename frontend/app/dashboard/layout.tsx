@@ -110,7 +110,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* User */}
         <div className="flex items-center gap-2.5 p-3 flex-shrink-0" style={{ borderTop: '1px solid var(--border-color)' }}>
-          <UserButton afterSignOutUrl="/" />
+          <UserButton />
           <AnimatePresence>
             {!collapsed && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-w-0">
