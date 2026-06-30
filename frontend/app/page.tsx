@@ -76,7 +76,7 @@ export default function LandingPage() {
                 Dashboard
               </button>
             </Link>
-            <UserButton afterSignOutUrl="/" />
+            <UserButton />
           </Show>
           <Show when="signed-out">
             <Link href="/sign-in">
